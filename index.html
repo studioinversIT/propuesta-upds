@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPDS · Sistema Comercial · Invers AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --bg:       #f7f7fb;
+  --white:    #ffffff;
+  --ink:      #0c0c1a;
+  --ink-2:    #3d3d52;
+  --ink-3:    #7a7a96;
+  --border:   #e2e2ec;
+  --indigo:   #4f46e5;
+  --indigo-d: #3730a3;
+  --violet:   #7c3aed;
+  --indigo-l: #eef2ff;
+  --indigo-m: #c7d2fe;
+  --r:        14px;
+  --r-lg:     22px;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media print {
+  .no-print{display:none!important}
+  body{background:#fff!important;font-size:12px}
+  .cover{border-radius:0!important}
+  .page-break{break-before:page}
+  .glass-card,.pilar-card{box-shadow:none!important;backdrop-filter:none!important}
+}
+
+/* ═══════════════════════════════════════════════
+   DOC WRAPPER
+═══════════════════════════════════════════════ */
+.doc {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 32px 120px;
+}
+
+/* ═══════════════════════════════════════════════
+   COVER — DARK EDITORIAL
+═══════════════════════════════════════════════ */
+.cover {
+  background: #080814;
+  border-radius: 0 0 36px 36px;
+  padding: 0;
+  margin: 0 -32px 80px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* subtle grain */
+.cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cover-inner {
+  position: relative;
+  z-index: 1;
+  padding: 64px 60px 68px;
+}
+
+/* indigo glow blob */
+.cover-blob {
+  position: absolute;
+  top: -140px; right: -140px;
+  width: 560px; height: 560px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79,70,229,.18) 0%, transparent 65%);
+  z-index: 0;
+}
+.cover-blob-2 {
+  position: absolute;
+  bottom: -80px; left: 10%;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,.1) 0%, transparent 65%);
+  z-index: 0;
+}
+
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 72px;
+  position: relative;
+  z-index: 2;
+}
+.cover-logo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+}
+.cover-logo strong { color: rgba(255,255,255,.7); }
+
+/* glass badge */
+.cover-pill {
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 99px;
+  padding: 6px 16px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(199,210,254,.7);
+}
+
+.cover-body { position: relative; z-index: 2; }
+
+.cover-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.cover-kicker-line {
+  width: 32px; height: 2px;
+  background: linear-gradient(90deg, var(--indigo), var(--violet));
+  border-radius: 2px;
+}
+.cover-kicker-text {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #818cf8;
+}
+
+.cover-h1 {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: -2px;
+  color: #fff;
+  margin-bottom: 22px;
+}
+.cover-h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, #a5b4fc, #c4b5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cover-tagline {
+  font-size: 15.5px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.7;
+  max-width: 500px;
+  margin-bottom: 60px;
+}
+
+/* glass meta panel */
+.cover-meta {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.07);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-image: linear-gradient(135deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.02) 100%);
+}
+@media(max-width:640px){.cover-meta{grid-template-columns:repeat(2,1fr)}}
+.cm {
+  padding: 20px 22px;
+  background: rgba(255,255,255,.03);
+}
+.cm-l {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  margin-bottom: 5px;
+}
+.cm-v {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: rgba(255,255,255,.78);
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION ANATOMY
+═══════════════════════════════════════════════ */
+.section { margin-bottom: 80px; }
+
+.s-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--indigo);
+  margin-bottom: 14px;
+}
+.s-eyebrow::before {
+  content: '';
+  display: block;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--indigo);
+}
+
+.s-h2 {
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.s-lead {
+  font-size: 16px;
+  color: var(--ink-2);
+  line-height: 1.75;
+  max-width: 620px;
+  margin-bottom: 40px;
+}
+
+.rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+  margin: 72px 0;
+}
+
+/* ═══════════════════════════════════════════════
+   DIAGNÓSTICO — EDITORIAL LIST
+═══════════════════════════════════════════════ */
+.diag-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+@media(max-width:640px){.diag-header{grid-template-columns:1fr}}
+
+.diag-stats {
+  display: flex;
+  gap: 32px;
+  flex-shrink: 0;
+}
+.ds {
+  text-align: right;
+}
+.ds-val {
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: var(--indigo);
+  margin-bottom: 3px;
+}
+.ds-lbl {
+  font-size: 11px;
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+/* Numbered pain list */
+.pain-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pain-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  position: relative;
+  transition: background .2s;
+}
+.pain-item:last-child { border-bottom: 1px solid var(--border); }
+.pain-n {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--indigo);
+  letter-spacing: 1px;
+  padding-top: 3px;
+}
+.pain-content {}
+.pain-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 7px;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+}
+.pain-desc {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  max-width: 500px;
+}
+.pain-stat {
+  margin-top: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--indigo);
+  background: var(--indigo-l);
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* pull quote */
+.pull-quote {
+  border-left: 3px solid var(--indigo);
+  padding: 20px 28px;
+  margin: 36px 0 0;
+  background: var(--white);
+  border-radius: 0 var(--r) var(--r) 0;
+}
+.pq-text {
+  font-size: 16px;
+  font-style: italic;
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+.pq-text strong { font-style: normal; color: var(--ink); }
+
+/* ═══════════════════════════════════════════════
+   HOLDING RATIONALE — GLASS SECTION
+   (the only true glass morphism — on a gradient bg)
+═══════════════════════════════════════════════ */
+.glass-section {
+  background: linear-gradient(145deg, #3730a3 0%, #4f46e5 40%, #6d28d9 100%);
+  border-radius: var(--r-lg);
+  padding: 56px 48px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.glass-section::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 65%);
+}
+.glass-section::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.05) 0%, transparent 65%);
+}
+
+.gs-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(199,210,254,.65);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.gs-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  max-width: 540px;
+  position: relative;
+  z-index: 1;
+}
+.gs-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.glass-cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+@media(max-width:640px){.glass-cards{grid-template-columns:1fr}}
+
+.glass-card {
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: var(--r);
+  padding: 24px 22px;
+  transition: background .2s, border-color .2s;
+}
+.glass-card:hover {
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.26);
+}
+.gc-val {
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.gc-lbl {
+  font-size: 12.5px;
+  color: rgba(255,255,255,.55);
+  line-height: 1.45;
+}
+
+.gs-insight {
+  margin-top: 28px;
+  background: rgba(0,0,0,.2);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--r);
+  padding: 18px 22px;
+  font-size: 13.5px;
+  color: rgba(255,255,255,.5);
+  line-height: 1.65;
+  position: relative;
+  z-index: 1;
+}
+.gs-insight strong { color: rgba(255,255,255,.8); }
+
+/* ═══════════════════════════════════════════════
+   4 PILARES — WATERMARK CARDS
+═══════════════════════════════════════════════ */
+.pilares-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 16px;
+}
+@media(max-width:640px){.pilares-grid{grid-template-columns:1fr}}
+
+.pilar-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 32px 28px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .2s, transform .2s;
+}
+.pilar-card:hover {
+  border-color: var(--indigo-m);
+  transform: translateY(-2px);
+}
+
+/* watermark number */
+.pilar-wm {
+  position: absolute;
+  top: -10px; right: 12px;
+  font-size: 120px;
+  font-weight: 900;
+  color: var(--indigo);
+  opacity: .04;
+  line-height: 1;
+  letter-spacing: -4px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* top accent */
+.pilar-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40px; height: 3px;
+  background: linear-gradient(90deg, var(--indigo), var(--violet));
+  border-radius: 0 0 3px 0;
+}
+
+.pilar-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--indigo);
+  margin-bottom: 12px;
+  position: relative;
+}
+.pilar-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+  line-height: 1.25;
+  position: relative;
+}
+.pilar-desc {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  margin-bottom: 18px;
+  position: relative;
+}
+.pilar-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+}
+.pilar-list li {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  line-height: 1.45;
+}
+.pilar-list li::before {
+  content: '—';
+  color: var(--indigo-m);
+  font-weight: 600;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+/* agentes inside pilar 3 */
+.agentes-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+  position: relative;
+}
+.ag-card {
+  background: var(--indigo-l);
+  border: 1px solid var(--indigo-m);
+  border-radius: 10px;
+  padding: 14px;
+}
+.ag-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--indigo-d);
+  margin-bottom: 5px;
+  line-height: 1.25;
+}
+.ag-desc {
+  font-size: 11.5px;
+  color: #4338ca;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════
+   IMPLEMENTACIÓN — TIMELINE
+═══════════════════════════════════════════════ */
+.timeline {
+  position: relative;
+  padding-left: 56px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 16px; top: 24px; bottom: 24px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--indigo), transparent);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 36px;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -47px; top: 0;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--indigo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tl-dot span {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--indigo);
+}
+.tl-week {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--indigo);
+  margin-bottom: 4px;
+}
+.tl-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 5px;
+  letter-spacing: -0.2px;
+}
+.tl-desc {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════════════
+   PRICING — ASYMMETRIC
+═══════════════════════════════════════════════ */
+.pricing-outer {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+@media(max-width:640px){.pricing-outer{grid-template-columns:1fr}}
+
+/* featured */
+.price-featured {
+  background: var(--white);
+  border: 1.5px solid var(--indigo);
+  border-radius: var(--r-lg);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 40px rgba(79,70,229,.1);
+}
+.price-featured::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--indigo), var(--violet));
+}
+.price-rec {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--indigo);
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 18px;
+}
+
+/* secondary */
+.price-secondary {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 32px 28px;
+}
+
+.p-title {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.4px;
+  margin-bottom: 6px;
+}
+.p-sub {
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+.p-price-row {
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.p-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 2px;
+}
+.p-val {
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -1.5px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.p-val small {
+  font-size: 18px;
+  vertical-align: top;
+  margin-top: 5px;
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.p-monthly {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--indigo);
+  margin-bottom: 2px;
+}
+.p-monthly-note {
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.p-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.p-list li {
+  font-size: 13px;
+  color: var(--ink-2);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.45;
+}
+.p-list li::before {
+  content: '✓';
+  font-weight: 700;
+  color: var(--indigo);
+  flex-shrink: 0;
+  font-size: 12px;
+  margin-top: 1px;
+}
+.p-list li.dim { color: var(--ink-3); }
+.p-list li.dim::before { color: var(--border); }
+
+.pricing-footnote {
+  margin-top: 20px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  line-height: 1.65;
+  padding: 16px 20px;
+  background: var(--bg);
+  border-radius: var(--r);
+}
+.pricing-footnote strong { color: var(--ink-2); }
+
+/* ═══════════════════════════════════════════════
+   CTA — DARK
+═══════════════════════════════════════════════ */
+.cta-section {
+  background: #080814;
+  border-radius: var(--r-lg);
+  padding: 68px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 280px;
+  background: radial-gradient(ellipse, rgba(79,70,229,.2) 0%, transparent 65%);
+}
+.cta-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(165,180,252,.55);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.cta-h2 {
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.cta-h2 span {
+  background: linear-gradient(90deg, #a5b4fc, #c4b5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cta-sub {
+  font-size: 15.5px;
+  color: rgba(255,255,255,.42);
+  max-width: 440px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+  position: relative;
+  z-index: 1;
+}
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--indigo), var(--violet));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 16px 40px;
+  border-radius: 12px;
+  text-decoration: none;
+  letter-spacing: .3px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 8px 32px rgba(79,70,229,.45);
+  transition: transform .2s, box-shadow .2s;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(79,70,229,.55);
+}
+.cta-fine {
+  margin-top: 16px;
+  font-size: 12.5px;
+  color: rgba(255,255,255,.25);
+  position: relative;
+  z-index: 1;
+}
+.cta-fine a { color: rgba(165,180,252,.45); text-decoration: none; }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+.footer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+/* ═══════════════════════════════════════════════
+   PRINT BTN
+═══════════════════════════════════════════════ */
+.print-btn {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 11px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 999;
+  letter-spacing: .3px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.25);
+}
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Exportar PDF</button>
+
+<div class="doc">
+
+<!-- ══════════════════════════════════
+     COVER
+══════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-blob"></div>
+  <div class="cover-blob-2"></div>
+  <div class="cover-inner">
+    <div class="cover-top">
+      <div class="cover-logo"><strong>INVERS</strong> AI TECHNOLOGIES</div>
+      <div class="cover-pill">Propuesta Confidencial</div>
+    </div>
+    <div class="cover-body">
+      <div class="cover-kicker">
+        <div class="cover-kicker-line"></div>
+        <div class="cover-kicker-text">Sistema Comercial Institucional · Agosto 2026</div>
+      </div>
+      <h1 class="cover-h1">
+        Una cuenta<br>
+        por sede. Un solo<br>
+        <em>acuerdo holding.</em>
+      </h1>
+      <p class="cover-tagline">
+        Cada sede de UPDS opera con su propio sistema independiente. El acuerdo holding establece un precio por sede significativamente menor al contratar las 9 juntas. Implementación en oleadas, sin saturar al equipo.
+      </p>
+      <div class="cover-meta">
+        <div class="cm"><div class="cm-l">Destinatario</div><div class="cm-v">Ahmed Mustafa</div></div>
+        <div class="cm"><div class="cm-l">Cargo</div><div class="cm-v">Director de Marketing</div></div>
+        <div class="cm"><div class="cm-l">Institución</div><div class="cm-v">UPDS · Bolivia</div></div>
+        <div class="cm"><div class="cm-l">Fecha límite</div><div class="cm-v">Octubre 2026</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     01 — DIAGNÓSTICO
+══════════════════════════════════ -->
+<div class="section">
+  <div class="s-eyebrow">01 · Lo que encontramos</div>
+  <div class="diag-header">
+    <div>
+      <h2 class="s-h2">5 WhatsApp.<br>4 asesoras.<br>Ningún sistema que los una.</h2>
+    </div>
+    <div class="diag-stats">
+      <div class="ds">
+        <div class="ds-val">2h</div>
+        <div class="ds-lbl">Tiempo de<br>respuesta actual</div>
+      </div>
+      <div class="ds">
+        <div class="ds-val">30%</div>
+        <div class="ds-lbl">Prospectos que<br>no convierten</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pain-list">
+
+    <div class="pain-item">
+      <div class="pain-n">01</div>
+      <div class="pain-content">
+        <div class="pain-title">La respuesta llega cuando el prospecto ya eligió otra universidad</div>
+        <div class="pain-desc">Un prospecto universitario consulta hasta tres instituciones al mismo tiempo. UPDS responde en un promedio de 30 minutos a 2 horas. No es un problema de equipo — es un problema de infraestructura. La asesora no puede responder en 2 minutos si no hay un sistema que lo haga primero.</div>
+        <div class="pain-stat">Cada hora de demora reduce la probabilidad de conversión un 10× (MIT Sloan, 2024)</div>
+      </div>
+    </div>
+
+    <div class="pain-item">
+      <div class="pain-n">02</div>
+      <div class="pain-content">
+        <div class="pain-title">La dirección no puede ver lo que está pasando en las 9 sedes</div>
+        <div class="pain-desc">Cada asesora lleva su propio método. Multu recibe los leads pero no muestra qué pasa después. El Director de Marketing no tiene visibilidad de qué sede convierte más, qué carrera tiene el ciclo de venta más corto, ni en qué etapa se pierde más presupuesto. Las decisiones de inversión en campaña se toman sin esa información.</div>
+      </div>
+    </div>
+
+    <div class="pain-item">
+      <div class="pain-n">03</div>
+      <div class="pain-content">
+        <div class="pain-title">El prospecto que agendó desaparece — y nadie lo recupera automáticamente</div>
+        <div class="pain-desc">UPDS identificó que la mayor pérdida ocurre en post-agendamiento. El prospecto ya demostró intención — ya dijo que sí. Sin confirmación automática, sin recordatorio a 24 horas y sin secuencia de recovery si no aparece, esa intención se evapora. Hoy ese proceso depende de que cada asesora recuerde hacerlo. Eso no escala en 9 sedes.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pull-quote">
+    <div class="pq-text">
+      "El equipo de UPDS no está fallando. Está atrapado en una infraestructura que no fue diseñada para operar en 9 sedes en paralelo. <strong>Octubre llega en 8 semanas.</strong> El sistema que UPDS use en esa temporada determinará la matrícula del año que viene."
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+
+<!-- ══════════════════════════════════
+     02 — POR QUÉ FUNCIONA ASÍ
+══════════════════════════════════ -->
+<div class="section">
+  <div class="s-eyebrow">02 · El modelo Invers</div>
+  <h2 class="s-h2">Implementamos por institución, no por sede.</h2>
+  <p class="s-lead">
+    Cada sistema que construimos opera sobre la estructura real del cliente. En el caso de UPDS, esa estructura tiene 9 sedes, operaciones en paralelo y un equipo distribuido. El sistema se diseña para ese volumen desde el día 1.
+  </p>
+
+  <div class="glass-section">
+    <div class="gs-eyebrow">El acuerdo holding — qué significa exactamente</div>
+    <div class="gs-title">Cada sede opera de forma independiente. El holding determina el precio al que UPDS accede a todas.</div>
+    <div class="gs-sub">Cada sede de UPDS recibe su propia cuenta SmartInvers — con su propio inbox, su propio pipeline, su propio equipo de asesoras. Son sistemas separados, no uno compartido. Lo que cambia con el acuerdo holding es el precio por sede: al comprometer las 9 juntas, el costo de implementación y la mensualidad por sede bajan significativamente respecto a contratar cada una de forma individual.</div>
+    <div class="glass-cards">
+      <div class="glass-card">
+        <div class="gc-val">9</div>
+        <div class="gc-lbl">Cuentas independientes. Cada sede opera con su propio sistema y equipo.</div>
+      </div>
+      <div class="glass-card">
+        <div class="gc-val">3</div>
+        <div class="gc-lbl">Oleadas de implementación. Sin saturar al equipo de UPDS ni al de Invers.</div>
+      </div>
+      <div class="glass-card">
+        <div class="gc-val">‑35%</div>
+        <div class="gc-lbl">Costo por sede bajo acuerdo holding vs. tarifa individual por sede.</div>
+      </div>
+    </div>
+    <div class="gs-insight">
+      <strong>Por qué el holding conviene:</strong> Una sede que contrate de forma individual paga la tarifa estándar. UPDS, al comprometer las 9 sedes bajo un solo acuerdo, accede a una tarifa por sede que no está disponible de otra forma — y la implementación en oleadas garantiza que cada sede reciba el mismo nivel de atención sin comprometer la calidad.
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+
+<!-- ══════════════════════════════════
+     03 — EL SISTEMA
+══════════════════════════════════ -->
+<div class="section page-break">
+  <div class="s-eyebrow">03 · SmartInvers CRM</div>
+  <h2 class="s-h2">Cuatro pilares.<br>Una sola operación.</h2>
+  <p class="s-lead">No es un CRM con extras. Es el sistema operativo comercial que UPDS no tiene todavía — diseñado sobre Multu y Moodle, no en lugar de ellos.</p>
+
+  <div class="pilares-grid">
+
+    <div class="pilar-card">
+      <div class="pilar-wm">01</div>
+      <div class="pilar-eyebrow">Pilar 01</div>
+      <div class="pilar-title">Captación Inteligente</div>
+      <div class="pilar-desc">Los 5 números de WhatsApp de UPDS convergen en un inbox único. Cada asesora ve sus conversaciones. Ahmed ve todo. Y cuando llega un prospecto, el sistema responde antes que cualquier persona.</div>
+      <ul class="pilar-list">
+        <li>Bandeja unificada — 5 WhatsApp centralizados, sin cambiar los números</li>
+        <li>WhatsApp API — número comercial protegido, sin riesgo de bloqueo</li>
+        <li>Respuesta automática en menos de 2 minutos, 7 días a la semana</li>
+        <li>Smart List — base de prospectos segmentada por sede y carrera</li>
+        <li>Integración con Multu como fuente de leads entrantes</li>
+      </ul>
+    </div>
+
+    <div class="pilar-card">
+      <div class="pilar-wm">02</div>
+      <div class="pilar-eyebrow">Pilar 02</div>
+      <div class="pilar-title">Automatización Comercial</div>
+      <div class="pilar-desc">El sistema que opera sin que nadie tenga que recordar nada. Desde el primer mensaje hasta la confirmación de asistencia — todo corre sin intervención humana hasta que el prospecto está listo para hablar.</div>
+      <ul class="pilar-list">
+        <li>Pipeline centralizado con etapas por sede y carrera</li>
+        <li>Agendamiento automático + confirmación inmediata</li>
+        <li>Recordatorio 24h antes y 2h antes — reducción activa de no-show</li>
+        <li>Recovery automático: no-show, post-visita sin cierre, leads fríos</li>
+        <li>Reactivación de la base histórica del último año</li>
+      </ul>
+    </div>
+
+    <div class="pilar-card">
+      <div class="pilar-wm">03</div>
+      <div class="pilar-eyebrow">Pilar 03</div>
+      <div class="pilar-title">Agentes de Inteligencia Artificial</div>
+      <div class="pilar-desc">La capa que atiende, filtra y califica sin que el equipo tenga que estar disponible. Dos agentes entrenados específicamente para el flujo comercial de UPDS:</div>
+      <div class="agentes-duo">
+        <div class="ag-card">
+          <div class="ag-name">Camila — Agente de Texto</div>
+          <div class="ag-desc">Atiende WhatsApp al instante. Filtra, califica y recopila datos. Responde preguntas de carreras, costos y requisitos. Las asesoras intervienen solo cuando el prospecto ya está listo.</div>
+        </div>
+        <div class="ag-card">
+          <div class="ag-name">Agente de Voz IA</div>
+          <div class="ag-desc">Para ~500 prospectos/mes en campaña. Llama, confirma, reagenda y califica por voz. Humanizado. Roles de ventas, agendamiento y consulta. Activación en Fase 2.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pilar-card">
+      <div class="pilar-wm">04</div>
+      <div class="pilar-eyebrow">Pilar 04</div>
+      <div class="pilar-title">Revenue Intelligence</div>
+      <div class="pilar-desc">Por primera vez, la dirección de UPDS tendrá visibilidad en tiempo real de lo que pasa en el embudo comercial de las 9 sedes — no después del mes, sino mientras sucede.</div>
+      <ul class="pilar-list">
+        <li>Dashboard KPIs en vivo — App Web y App Mobile</li>
+        <li>Métricas por sede: conversión, no-show rate, ciclo de venta por carrera</li>
+        <li>Revenue por canal: qué campaña trae los prospectos que más se inscriben</li>
+        <li>Detección automática de fugas en el embudo</li>
+        <li>Sesión de Revenue Intelligence inicial incluida</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="rule"></div>
+
+
+<!-- ══════════════════════════════════
+     04 — IMPLEMENTACIÓN
+══════════════════════════════════ -->
+<div class="section">
+  <div class="s-eyebrow">04 · Implementación</div>
+  <h2 class="s-h2">3 oleadas.<br>9 sedes. Sin saturar al equipo.</h2>
+  <p class="s-lead">Cada sede recibe su propio proceso de implementación de 6 semanas. Las oleadas garantizan la misma calidad en cada una — sin comprometer la operación mientras se implementa la siguiente.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"><span>1</span></div>
+      <div class="tl-week">Oleada 1 · Semanas 1–6 · Sedes 1–3</div>
+      <div class="tl-title">Las primeras 3 sedes — operativas antes de octubre</div>
+      <div class="tl-desc">Kickoff, auditoría técnica, conexión de WhatsApp por sede, entrenamiento de Camila con carreras y costos específicos de cada sede, pipeline activo, dashboard en vivo y capacitación del equipo. Las sedes 1–3 entran en producción en la semana 6.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"><span>2</span></div>
+      <div class="tl-week">Oleada 2 · Semanas 7–12 · Sedes 4–6</div>
+      <div class="tl-title">Con metodología probada, las siguientes 3 sedes se implementan más rápido</div>
+      <div class="tl-desc">La metodología ya está validada con las primeras sedes. Los flujos base se replican y se ajustan para el equipo y contexto de cada nueva sede. El equipo de UPDS ya conoce el sistema — el onboarding de asesoras es más ágil.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"><span>3</span></div>
+      <div class="tl-week">Oleada 3 · Semanas 13–18 · Sedes 7–9</div>
+      <div class="tl-title">Las últimas 3 sedes — cierre del acuerdo holding completo</div>
+      <div class="tl-desc">Al finalizar la Oleada 3, las 9 sedes de UPDS operan con su propio sistema SmartInvers activo. La dirección tiene visibilidad del estado de implementación de cada sede en todo momento.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"><span>✓</span></div>
+      <div class="tl-week">Semana 18 — Holding completo</div>
+      <div class="tl-title">Las 9 sedes operativas bajo el mismo estándar comercial</div>
+      <div class="tl-desc">Cada sede con su cuenta independiente, su pipeline propio y su equipo capacitado. El acuerdo holding está completo y la tarifa por sede queda fija para todas las sedes activas durante la duración del contrato.</div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+
+<!-- ══════════════════════════════════
+     05 — INVERSIÓN
+══════════════════════════════════ -->
+<div class="section page-break">
+  <div class="s-eyebrow">05 · Inversión</div>
+  <h2 class="s-h2">Una tarifa por sede.<br>Un solo acuerdo.</h2>
+  <p class="s-lead">Cada sede opera con su propia cuenta SmartInvers — sistema independiente, datos propios, equipo propio. El acuerdo holding fija una tarifa por sede menor a la que pagarían sede a sede, durante toda la implementación.</p>
+
+  <div class="pricing-outer">
+
+    <!-- HOLDING -->
+    <div class="price-featured">
+      <div class="price-rec">&#11088; Acuerdo recomendado</div>
+      <div class="p-title">Acuerdo Holding · 9 Sedes</div>
+      <div class="p-sub">9 cuentas SmartInvers independientes bajo un solo contrato. Tarifa por sede con beneficio de volumen — más baja que la tarifa individual de mercado.</div>
+      <div class="p-price-row">
+        <div class="p-lbl">Setup por sede (tarifa holding)</div>
+        <div class="p-val"><small>$</small>1,497 <span style="font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:0">× 9 sedes</span></div>
+        <div style="font-size:11.5px;color:var(--ink-3);margin-bottom:14px">Total setup: <strong style="color:var(--ink-2)">$13,473</strong> — implementado en 3 oleadas de 3 sedes</div>
+        <div class="p-lbl">Mensualidad por sede (tarifa holding)</div>
+        <div class="p-monthly">$497 / mes por sede &nbsp;·&nbsp; × 9 = $4,473 / mes</div>
+        <div class="p-monthly-note">Soporte Premium incluido · 5 días/semana</div>
+      </div>
+      <ul class="p-list">
+        <li>9 cuentas SmartInvers independientes — datos 100% de UPDS por sede</li>
+        <li>Los 4 pilares en cada cuenta: Captación, Automatización, Agentes IA, Revenue Intelligence</li>
+        <li>Camila (texto) activa desde semana 2 · Agente de Voz incluido en Fase 2</li>
+        <li>Dashboard de KPIs en vivo — App Web y App Mobile por sede</li>
+        <li>Benchmarks cruzados entre las 9 sedes</li>
+        <li>Implementación en 3 oleadas — sin sobresaturar los equipos</li>
+        <li>Capacitación del equipo completo + manual operativo</li>
+        <li>Soporte Premium: SLA 95%, 5 días/semana</li>
+      </ul>
+    </div>
+
+    <!-- INDIVIDUAL -->
+    <div class="price-secondary">
+      <div class="p-title">Tarifa Individual · 1 Sede</div>
+      <div class="p-sub">Para validar el sistema con una sede antes de comprometer el acuerdo holding. Sin beneficio de volumen.</div>
+      <div class="p-price-row">
+        <div class="p-lbl">Setup (tarifa estándar)</div>
+        <div class="p-val"><small>$</small>1,997</div>
+        <div class="p-lbl">Mensualidad (tarifa estándar)</div>
+        <div class="p-monthly">$647 / mes · 1 sede</div>
+        <div class="p-monthly-note">Soporte Estándar · 2 días/semana</div>
+      </div>
+      <ul class="p-list">
+        <li>1 cuenta SmartInvers para la sede piloto</li>
+        <li>Pilares 1 y 2 — Captación + Automatización</li>
+        <li>Camila (texto) configurada para la sede</li>
+        <li>Pipeline y dashboard básico de KPIs</li>
+        <li>Capacitación del equipo de la sede</li>
+        <li class="dim">Precio por sede mayor que en el acuerdo holding</li>
+        <li class="dim">Sin Revenue Intelligence multi-sede</li>
+        <li class="dim">Agente de Voz no incluido</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="pricing-footnote">
+    <strong>Costos variables (a cargo de UPDS):</strong> Pauta publicitaria Meta · WhatsApp Business API por número · Telefonía agente de voz según volumen. Precios en USD. El acuerdo holding es un contrato único que cubre las 9 sedes con tarifa fija por sede durante toda la vigencia.
+  </div>
+</div>
+
+<div class="rule"></div>
+
+
+<!-- ══════════════════════════════════
+     CTA
+══════════════════════════════════ -->
+<div class="section">
+  <div class="cta-section">
+    <div class="cta-eyebrow">El siguiente paso</div>
+    <h2 class="cta-h2">
+      La temporada de octubre<br>
+      llega <span>con o sin el sistema</span>.
+    </h2>
+    <p class="cta-sub">
+      45 minutos con Ahmed y el equipo directivo. Revisamos la propuesta, definimos el alcance y acordamos la fecha de inicio. La única decisión pendiente es cuándo.
+    </p>
+    <a href="https://wa.me/5491126273408?text=Hola%20Esteban%2C%20vi%20la%20propuesta%20SmartInvers%20para%20UPDS%20y%20quiero%20coordinar%20la%20reuni%C3%B3n." class="cta-btn" target="_blank">Hablar con Esteban →</a>
+    <div class="cta-fine">
+      WhatsApp directo · Esteban Vacaflores
+      &nbsp;·&nbsp;
+      <a href="https://invers.ai" target="_blank">invers.ai</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>Invers AI Technologies LLC · Wyoming, EE.UU.</div>
+  <div>Propuesta confidencial · UPDS · Agosto 2026</div>
+</div>
+
+</div><!-- /doc -->
+</body>
+</html>
