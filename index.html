@@ -893,6 +893,124 @@ body {
   letter-spacing: .3px;
   box-shadow: 0 4px 20px rgba(0,0,0,.25);
 }
+
+/* ═══════════════════════════════════════════════
+   MOBILE — < 640px
+═══════════════════════════════════════════════ */
+@media(max-width:640px){
+  .doc {
+    padding: 0 16px 80px;
+  }
+  .cover {
+    margin: 0 -16px 56px;
+    border-radius: 0 0 24px 24px;
+  }
+  .cover-inner {
+    padding: 36px 24px 44px;
+  }
+  .cover-top {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .cover-h1 {
+    font-size: clamp(28px, 8vw, 44px);
+    letter-spacing: -1px;
+  }
+  .cover-tagline {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  .s-h2 {
+    font-size: clamp(22px, 6.5vw, 32px);
+    letter-spacing: -0.5px;
+  }
+  .s-lead {
+    font-size: 14.5px;
+  }
+  .section {
+    margin-bottom: 56px;
+  }
+  .rule {
+    margin: 48px 0;
+  }
+  .diag-stats {
+    gap: 20px;
+  }
+  .ds-val {
+    font-size: 32px;
+  }
+  .pain-item {
+    grid-template-columns: 44px 1fr;
+    padding: 20px 0;
+  }
+  .glass-section {
+    padding: 36px 24px;
+    border-radius: var(--r);
+  }
+  .gs-title {
+    font-size: 22px;
+  }
+  .gs-sub {
+    font-size: 13.5px;
+    margin-bottom: 28px;
+  }
+  .gc-val {
+    font-size: 28px;
+  }
+  .timeline {
+    padding-left: 40px;
+  }
+  .tl-dot {
+    left: -33px;
+    width: 24px; height: 24px;
+  }
+  .cta-section {
+    padding: 48px 24px;
+    border-radius: var(--r);
+  }
+  .cta-h2 {
+    font-size: clamp(24px, 7vw, 36px);
+    letter-spacing: -0.8px;
+  }
+  .cta-sub {
+    font-size: 14px;
+  }
+  .cta-btn {
+    width: 100%;
+    text-align: center;
+    padding: 18px 24px;
+    font-size: 15px;
+  }
+  .footer {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+  .print-btn {
+    bottom: 16px; right: 16px;
+    font-size: 11px;
+    padding: 9px 16px;
+  }
+  .p-val {
+    font-size: 28px;
+  }
+  .price-featured {
+    padding: 28px 20px;
+  }
+  .price-secondary {
+    padding: 24px 20px;
+  }
+  .agentes-duo {
+    grid-template-columns: 1fr;
+  }
+  .pull-quote {
+    padding: 16px 18px;
+  }
+  .pq-text {
+    font-size: 14.5px;
+  }
+}
 </style>
 </head>
 <body>
@@ -1164,10 +1282,10 @@ body {
       <div class="p-sub">9 cuentas SmartInvers independientes bajo un solo contrato. Tarifa por sede con beneficio de volumen — más baja que la tarifa individual de mercado.</div>
       <div class="p-price-row">
         <div class="p-lbl">Setup por sede (tarifa holding)</div>
-        <div class="p-val"><small>$</small>1,497 <span style="font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:0">× 9 sedes</span></div>
-        <div style="font-size:11.5px;color:var(--ink-3);margin-bottom:14px">Total setup: <strong style="color:var(--ink-2)">$13,473</strong> — implementado en 3 oleadas de 3 sedes</div>
+        <div class="p-val"><small>$</small>1,997 <span style="font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:0">× 9 sedes</span></div>
+        <div style="font-size:11.5px;color:var(--ink-3);margin-bottom:14px">Total setup: <strong style="color:var(--ink-2)">$17,973</strong> — implementado en 3 oleadas de 3 sedes</div>
         <div class="p-lbl">Mensualidad por sede (tarifa holding)</div>
-        <div class="p-monthly">$497 / mes por sede &nbsp;·&nbsp; × 9 = $4,473 / mes</div>
+        <div class="p-monthly">$697 / mes por sede &nbsp;·&nbsp; × 9 = $6,273 / mes</div>
         <div class="p-monthly-note">Soporte Premium incluido · 5 días/semana</div>
       </div>
       <ul class="p-list">
@@ -1188,9 +1306,9 @@ body {
       <div class="p-sub">Para validar el sistema con una sede antes de comprometer el acuerdo holding. Sin beneficio de volumen.</div>
       <div class="p-price-row">
         <div class="p-lbl">Setup (tarifa estándar)</div>
-        <div class="p-val"><small>$</small>1,997</div>
+        <div class="p-val"><small>$</small>2,749</div>
         <div class="p-lbl">Mensualidad (tarifa estándar)</div>
-        <div class="p-monthly">$647 / mes · 1 sede</div>
+        <div class="p-monthly">$897 / mes · 1 sede</div>
         <div class="p-monthly-note">Soporte Estándar · 2 días/semana</div>
       </div>
       <ul class="p-list">
