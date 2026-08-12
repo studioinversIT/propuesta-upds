@@ -976,6 +976,186 @@ body {
 }
 
 /* ═══════════════════════════════════════════════
+   CALCULADOR INTERACTIVO
+═══════════════════════════════════════════════ */
+.calc-wrap {
+  background: #080814;
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-top: 2px;
+}
+.calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.calc-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 3px;
+}
+.calc-subtitle {
+  font-size: 11.5px;
+  color: rgba(255,255,255,.35);
+  line-height: 1.5;
+}
+.calc-presets {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.calc-preset {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.45);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.calc-preset.active,
+.calc-preset:hover {
+  background: var(--indigo);
+  border-color: var(--indigo);
+  color: #fff;
+}
+.calc-body {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 0;
+}
+@media(max-width:700px){ .calc-body{ grid-template-columns: 1fr; } }
+
+.calc-inputs {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-right: 1px solid rgba(255,255,255,.06);
+}
+.calc-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+  align-items: center;
+}
+@media(max-width:500px){ .calc-row{ grid-template-columns:1fr; gap:6px; } }
+.calc-lbl {
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.calc-rate {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(165,180,252,.6);
+  background: rgba(79,70,229,.15);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+.calc-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.calc-slider {
+  -webkit-appearance: none;
+  width: 130px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,.1);
+  outline: none;
+  cursor: pointer;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--indigo);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(79,70,229,.6);
+}
+.calc-num {
+  width: 72px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 6px;
+  color: rgba(255,255,255,.8);
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 5px 8px;
+  text-align: right;
+  outline: none;
+}
+.calc-num:focus { border-color: var(--indigo); }
+.calc-result {
+  font-size: 12px;
+  color: rgba(255,255,255,.35);
+  white-space: nowrap;
+  min-width: 70px;
+  text-align: right;
+}
+.calc-result strong {
+  color: rgba(255,255,255,.75);
+  font-weight: 700;
+}
+.calc-total-box {
+  padding: 20px 20px;
+  background: rgba(79,70,229,.08);
+  display: flex;
+  flex-direction: column;
+}
+.calc-fixed-lines {
+  margin-bottom: 16px;
+}
+.calc-fixed-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255,255,255,.35);
+  margin-bottom: 5px;
+}
+.calc-divider {
+  height: 1px;
+  background: rgba(255,255,255,.07);
+  margin: 4px 0 16px;
+}
+.calc-total-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(165,180,252,.5);
+  margin-bottom: 6px;
+}
+.calc-total-val {
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.calc-total-note {
+  font-size: 10px;
+  color: rgba(255,255,255,.25);
+  line-height: 1.55;
+  margin-top: auto;
+}
+
+/* ═══════════════════════════════════════════════
    FAQ — ANTES DE DECIDIR
 ═══════════════════════════════════════════════ */
 .faq-list {
@@ -1451,17 +1631,17 @@ body {
       <div class="vc-title">Costos variables de infraestructura</div>
       <div class="vc-sub">Adicionales al fee mensual fijo. Se facturan según uso real — no hay mínimos ocultos. La pauta publicitaria Meta es inversión directa de UPDS a Meta y no está incluida aquí.</div>
     </div>
-    <div class="vc-grid">
+    <div class="vc-grid" style="grid-template-columns:repeat(3,1fr)">
 
       <div class="vc-item">
         <div class="vc-concept">WhatsApp Business API</div>
-        <div class="vc-desc">Número comercial verificado por Meta. Necesario por cada WhatsApp activo conectado al sistema.</div>
-        <div class="vc-price">$10 <span>/ número / mes</span></div>
+        <div class="vc-desc">Integración de la plataforma de mensajería comercial de Meta al sistema.</div>
+        <div class="vc-price">$10 <span>/ mes</span></div>
       </div>
 
       <div class="vc-item">
         <div class="vc-concept">Plantillas de utilidad</div>
-        <div class="vc-desc">Confirmaciones de cita, recordatorios y seguimiento post-consulta. Bolivia · Resto de LATAM.</div>
+        <div class="vc-desc">Confirmaciones, recordatorios y seguimiento post-consulta. Bolivia · Resto de LATAM.</div>
         <div class="vc-price">$0.0113 <span>/ mensaje</span></div>
       </div>
 
@@ -1472,8 +1652,14 @@ body {
       </div>
 
       <div class="vc-item">
-        <div class="vc-concept">Agente de Voz — Telefonía</div>
-        <div class="vc-desc">Línea Bolivia $35/mes · Salientes a móvil $0.42/min · Salientes a fijo $0.27/min · Entrantes $0.06/min.</div>
+        <div class="vc-concept">Agente de Voz — Línea</div>
+        <div class="vc-desc">Número Bolivia dedicado para el agente de voz IA. Cargo fijo mensual por línea activa.</div>
+        <div class="vc-price">$35 <span>/ línea / mes</span></div>
+      </div>
+
+      <div class="vc-item">
+        <div class="vc-concept">Agente de Voz — Minutos</div>
+        <div class="vc-desc">Salientes a móvil $0.42/min · Salientes a fijo $0.27/min · Entrantes $0.06/min.</div>
         <div class="vc-price">$0.06–0.42 <span>/ min</span></div>
       </div>
 
@@ -1484,6 +1670,93 @@ body {
       </div>
 
     </div>
+    <!-- CALCULADOR INTERACTIVO -->
+    <div class="calc-wrap">
+      <div class="calc-header">
+        <div>
+          <div class="calc-title">Estimador de costos variables</div>
+          <div class="calc-subtitle">Ajusta los volúmenes según tu operación y ve el costo mensual estimado en tiempo real.</div>
+        </div>
+        <div class="calc-presets">
+          <button class="calc-preset" onclick="setPreset(1)">1 sede</button>
+          <button class="calc-preset" onclick="setPreset(3)">3 sedes</button>
+          <button class="calc-preset active" onclick="setPreset(9)">9 sedes</button>
+        </div>
+      </div>
+
+      <div class="calc-body">
+        <div class="calc-inputs">
+
+          <div class="calc-row">
+            <div class="calc-lbl">Mensajes de utilidad <span class="calc-rate">$0.0113 / msg</span></div>
+            <div class="calc-controls">
+              <input type="range" class="calc-slider" id="sl-util" min="0" max="20000" step="100" value="4500" oninput="sync('util',this.value)">
+              <input type="number" class="calc-num" id="in-util" value="4500" oninput="sync('util',this.value)">
+            </div>
+            <div class="calc-result">= <strong id="r-util">$50.85</strong></div>
+          </div>
+
+          <div class="calc-row">
+            <div class="calc-lbl">Mensajes de marketing <span class="calc-rate">$0.0740 / msg</span></div>
+            <div class="calc-controls">
+              <input type="range" class="calc-slider" id="sl-mkt" min="0" max="10000" step="100" value="1800" oninput="sync('mkt',this.value)">
+              <input type="number" class="calc-num" id="in-mkt" value="1800" oninput="sync('mkt',this.value)">
+            </div>
+            <div class="calc-result">= <strong id="r-mkt">$133.20</strong></div>
+          </div>
+
+          <div class="calc-row">
+            <div class="calc-lbl">Minutos voz salientes (móvil) <span class="calc-rate">$0.42 / min</span></div>
+            <div class="calc-controls">
+              <input type="range" class="calc-slider" id="sl-vout" min="0" max="2000" step="10" value="900" oninput="sync('vout',this.value)">
+              <input type="number" class="calc-num" id="in-vout" value="900" oninput="sync('vout',this.value)">
+            </div>
+            <div class="calc-result">= <strong id="r-vout">$378.00</strong></div>
+          </div>
+
+          <div class="calc-row">
+            <div class="calc-lbl">Minutos voz entrantes <span class="calc-rate">$0.06 / min</span></div>
+            <div class="calc-controls">
+              <input type="range" class="calc-slider" id="sl-vin" min="0" max="1000" step="10" value="450" oninput="sync('vin',this.value)">
+              <input type="number" class="calc-num" id="in-vin" value="450" oninput="sync('vin',this.value)">
+            </div>
+            <div class="calc-result">= <strong id="r-vin">$27.00</strong></div>
+          </div>
+
+          <div class="calc-row">
+            <div class="calc-lbl">Emails enviados <span class="calc-rate">$0.675 / 1,000</span></div>
+            <div class="calc-controls">
+              <input type="range" class="calc-slider" id="sl-email" min="0" max="50000" step="500" value="9000" oninput="sync('email',this.value)">
+              <input type="number" class="calc-num" id="in-email" value="9000" oninput="sync('email',this.value)">
+            </div>
+            <div class="calc-result">= <strong id="r-email">$6.08</strong></div>
+          </div>
+
+        </div>
+
+        <div class="calc-total-box">
+          <div class="calc-fixed-lines">
+            <div class="calc-fixed-row">
+              <span>WhatsApp Business API</span>
+              <span>$10.00</span>
+            </div>
+            <div class="calc-fixed-row">
+              <span>Líneas agente de voz <span id="lines-label">(9)</span></span>
+              <span id="r-lines">$315.00</span>
+            </div>
+            <div class="calc-fixed-row" style="border-top:1px solid rgba(255,255,255,.12);margin-top:8px;padding-top:8px;font-weight:600;color:rgba(255,255,255,.6)">
+              <span>Fijos mensuales</span>
+              <span id="r-fixed">$325.00</span>
+            </div>
+          </div>
+          <div class="calc-divider"></div>
+          <div class="calc-total-label">Total variable mensual estimado</div>
+          <div class="calc-total-val">$<span id="grand-total">595.13</span></div>
+          <div class="calc-total-note">No incluye fee fijo Invers ($447/sede) ni pauta Meta Ads</div>
+        </div>
+      </div>
+    </div>
+
     <div class="vc-note" style="line-height:1.75">
       <strong style="color:var(--ink-2)">¿Qué genera cada tipo de mensaje?</strong> Las plantillas de <strong style="color:var(--ink-2)">utilidad</strong> cubren el flujo operativo diario: confirmaciones de cita, recordatorios 24h antes, seguimiento post-reunión y avisos de trámites pendientes — son el costo base de operar el sistema. Las plantillas de <strong style="color:var(--ink-2)">marketing</strong> se activan en campañas específicas: reactivación de prospectos dormidos, arranque de ciclo académico o carreras con cupos disponibles. El 90% del volumen mensual de UPDS corresponde a utilidad. El marketing se usa puntualmente, no de forma continua.
       <br><br>
@@ -1581,5 +1854,63 @@ body {
 </div>
 
 </div><!-- /doc -->
+
+<script>
+const RATES = { util:0.0113, mkt:0.074, vout:0.42, vin:0.06, email:0.675/1000 };
+const PRESETS = {
+  1: { util:500,  mkt:200,  vout:100, vin:50,  email:1000, lines:1  },
+  3: { util:1500, mkt:600,  vout:300, vin:150, email:3000, lines:3  },
+  9: { util:4500, mkt:1800, vout:900, vin:450, email:9000, lines:9  }
+};
+
+function fmt(n){ return n.toFixed(2); }
+
+function calc(){
+  const util  = +document.getElementById('in-util').value  || 0;
+  const mkt   = +document.getElementById('in-mkt').value   || 0;
+  const vout  = +document.getElementById('in-vout').value  || 0;
+  const vin   = +document.getElementById('in-vin').value   || 0;
+  const email = +document.getElementById('in-email').value || 0;
+  const lines = +document.getElementById('in-vout').dataset.lines || 9;
+
+  const rUtil  = util  * RATES.util;
+  const rMkt   = mkt   * RATES.mkt;
+  const rVout  = vout  * RATES.vout;
+  const rVin   = vin   * RATES.vin;
+  const rEmail = email * RATES.email;
+  const rLines = lines * 35;
+  const rFixed = 10 + rLines;
+  const total  = rUtil + rMkt + rVout + rVin + rEmail + rFixed;
+
+  document.getElementById('r-util').textContent  = '$' + fmt(rUtil);
+  document.getElementById('r-mkt').textContent   = '$' + fmt(rMkt);
+  document.getElementById('r-vout').textContent  = '$' + fmt(rVout);
+  document.getElementById('r-vin').textContent   = '$' + fmt(rVin);
+  document.getElementById('r-email').textContent = '$' + fmt(rEmail);
+  document.getElementById('r-lines').textContent = '$' + fmt(rLines);
+  document.getElementById('r-fixed').textContent = '$' + fmt(rFixed);
+  document.getElementById('grand-total').textContent = fmt(total);
+  document.getElementById('lines-label').textContent = '(' + lines + ')';
+}
+
+function sync(key, val){
+  val = Math.max(0, +val || 0);
+  document.getElementById('sl-' + key).value = val;
+  document.getElementById('in-' + key).value = val;
+  calc();
+}
+
+function setPreset(n){
+  const p = PRESETS[n];
+  document.getElementById('in-vout').dataset.lines = p.lines;
+  ['util','mkt','vout','vin','email'].forEach(k => sync(k, p[k]));
+  document.querySelectorAll('.calc-preset').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// init
+document.getElementById('in-vout').dataset.lines = 9;
+calc();
+</script>
 </body>
 </html>
