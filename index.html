@@ -979,180 +979,246 @@ body {
    CALCULADOR INTERACTIVO
 ═══════════════════════════════════════════════ */
 .calc-wrap {
-  background: #080814;
-  border-radius: var(--r);
+  background: #0a0a18;
+  border-radius: var(--r-lg);
   overflow: hidden;
-  margin-top: 2px;
+  margin-top: 16px;
+  border: 1px solid rgba(255,255,255,.06);
 }
 .calc-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 22px 24px 18px;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  gap: 16px;
+  padding: 32px 36px 28px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  gap: 20px;
   flex-wrap: wrap;
 }
 .calc-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: rgba(255,255,255,.85);
-  margin-bottom: 3px;
+  font-size: 16px;
+  font-weight: 800;
+  color: rgba(255,255,255,.9);
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
 }
 .calc-subtitle {
-  font-size: 11.5px;
-  color: rgba(255,255,255,.35);
-  line-height: 1.5;
+  font-size: 12.5px;
+  color: rgba(255,255,255,.3);
+  line-height: 1.6;
+  max-width: 380px;
 }
 .calc-presets {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 .calc-preset {
-  background: rgba(255,255,255,.06);
+  background: rgba(255,255,255,.05);
   border: 1px solid rgba(255,255,255,.1);
-  color: rgba(255,255,255,.45);
+  color: rgba(255,255,255,.4);
   font-family: inherit;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 9px 20px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all .15s;
+  transition: all .18s;
+  letter-spacing: .2px;
 }
 .calc-preset.active,
 .calc-preset:hover {
   background: var(--indigo);
   border-color: var(--indigo);
   color: #fff;
+  box-shadow: 0 4px 16px rgba(79,70,229,.35);
 }
 .calc-body {
   display: grid;
-  grid-template-columns: 1fr 240px;
-  gap: 0;
+  grid-template-columns: 1fr 280px;
 }
-@media(max-width:700px){ .calc-body{ grid-template-columns: 1fr; } }
-
 .calc-inputs {
-  padding: 20px 24px;
+  padding: 32px 36px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  border-right: 1px solid rgba(255,255,255,.06);
+  gap: 28px;
+  border-right: 1px solid rgba(255,255,255,.05);
 }
-.calc-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 12px;
-  align-items: center;
-}
-@media(max-width:500px){ .calc-row{ grid-template-columns:1fr; gap:6px; } }
-.calc-lbl {
-  font-size: 12px;
-  color: rgba(255,255,255,.55);
+.calc-row {}
+.calc-row-top {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.calc-lbl {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,.6);
 }
 .calc-rate {
-  font-size: 10px;
-  font-weight: 600;
-  color: rgba(165,180,252,.6);
-  background: rgba(79,70,229,.15);
-  padding: 2px 7px;
-  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: rgba(165,180,252,.7);
+  background: rgba(79,70,229,.18);
+  padding: 3px 9px;
+  border-radius: 5px;
+  letter-spacing: .3px;
 }
-.calc-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.calc-row-mid {
+  margin-bottom: 10px;
 }
 .calc-slider {
   -webkit-appearance: none;
-  width: 130px;
-  height: 3px;
+  width: 100%;
+  height: 4px;
   border-radius: 2px;
-  background: rgba(255,255,255,.1);
+  background: rgba(255,255,255,.08);
   outline: none;
   cursor: pointer;
 }
 .calc-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 14px; height: 14px;
+  width: 18px; height: 18px;
   border-radius: 50%;
-  background: var(--indigo);
+  background: linear-gradient(135deg, var(--indigo), var(--violet));
   cursor: pointer;
-  box-shadow: 0 0 6px rgba(79,70,229,.6);
+  box-shadow: 0 2px 10px rgba(79,70,229,.5);
+  transition: transform .1s;
+}
+.calc-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.calc-row-bot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .calc-num {
-  width: 72px;
-  background: rgba(255,255,255,.05);
+  width: 88px;
+  background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.1);
-  border-radius: 6px;
-  color: rgba(255,255,255,.8);
+  border-radius: 8px;
+  color: rgba(255,255,255,.85);
   font-family: inherit;
-  font-size: 11.5px;
-  font-weight: 600;
-  padding: 5px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 12px;
   text-align: right;
   outline: none;
+  transition: border-color .15s;
 }
-.calc-num:focus { border-color: var(--indigo); }
+.calc-num:focus { border-color: var(--indigo); background: rgba(79,70,229,.08); }
 .calc-result {
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255,255,255,.35);
-  white-space: nowrap;
-  min-width: 70px;
-  text-align: right;
 }
 .calc-result strong {
-  color: rgba(255,255,255,.75);
-  font-weight: 700;
+  color: rgba(255,255,255,.8);
+  font-weight: 800;
+  font-size: 15px;
 }
+/* total panel */
 .calc-total-box {
-  padding: 20px 20px;
-  background: rgba(79,70,229,.08);
+  padding: 32px 28px;
+  background: linear-gradient(160deg, rgba(79,70,229,.12) 0%, rgba(124,58,237,.06) 100%);
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 .calc-fixed-lines {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.calc-fixed-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.2);
+  margin-bottom: 12px;
 }
 .calc-fixed-row {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
-  color: rgba(255,255,255,.35);
-  margin-bottom: 5px;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255,255,255,.38);
+  margin-bottom: 8px;
+  gap: 8px;
 }
-.calc-divider {
-  height: 1px;
-  background: rgba(255,255,255,.07);
-  margin: 4px 0 16px;
+.calc-fixed-row span:last-child {
+  font-weight: 700;
+  color: rgba(255,255,255,.55);
+  white-space: nowrap;
+}
+.calc-fixed-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,.5);
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  margin-top: 4px;
+}
+.calc-total-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 8px;
 }
 .calc-total-label {
   font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 1.8px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(165,180,252,.5);
-  margin-bottom: 6px;
-}
-.calc-total-val {
-  font-size: 36px;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -1.5px;
-  line-height: 1;
+  color: rgba(165,180,252,.45);
   margin-bottom: 10px;
 }
-.calc-total-note {
-  font-size: 10px;
+.calc-total-val {
+  font-size: 48px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.calc-total-val small {
+  font-size: 22px;
+  vertical-align: super;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-right: 2px;
+}
+.calc-total-period {
+  font-size: 12px;
   color: rgba(255,255,255,.25);
-  line-height: 1.55;
-  margin-top: auto;
+  margin-bottom: 20px;
+}
+.calc-total-note {
+  font-size: 10.5px;
+  color: rgba(255,255,255,.2);
+  line-height: 1.65;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.calc-provider-note {
+  padding: 14px 36px;
+  font-size: 11px;
+  color: rgba(255,255,255,.2);
+  border-top: 1px solid rgba(255,255,255,.05);
+  line-height: 1.6;
+}
+
+@media(max-width:700px){
+  .calc-body { grid-template-columns: 1fr; }
+  .calc-inputs { padding: 24px 20px; gap: 24px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.05); }
+  .calc-header { padding: 24px 20px 20px; }
+  .calc-total-box { padding: 24px 20px; }
+  .calc-total-val { font-size: 40px; }
+  .calc-preset { padding: 8px 14px; font-size: 11px; }
+  .calc-provider-note { padding: 14px 20px; }
 }
 
 /* ═══════════════════════════════════════════════
@@ -1675,12 +1741,12 @@ body {
       <div class="calc-header">
         <div>
           <div class="calc-title">Estimador de costos variables</div>
-          <div class="calc-subtitle">Ajusta los volúmenes según tu operación y ve el costo mensual estimado en tiempo real.</div>
+          <div class="calc-subtitle">Mueve los sliders según el volumen de uso estimado de tu operación y ve el costo mensual en tiempo real.</div>
         </div>
         <div class="calc-presets">
-          <button class="calc-preset" onclick="setPreset(1)">1 sede</button>
-          <button class="calc-preset" onclick="setPreset(3)">3 sedes</button>
-          <button class="calc-preset active" onclick="setPreset(9)">9 sedes</button>
+          <button class="calc-preset" onclick="setPreset(1,event)">1 sede</button>
+          <button class="calc-preset" onclick="setPreset(3,event)">3 sedes</button>
+          <button class="calc-preset active" onclick="setPreset(9,event)">9 sedes</button>
         </div>
       </div>
 
@@ -1688,54 +1754,80 @@ body {
         <div class="calc-inputs">
 
           <div class="calc-row">
-            <div class="calc-lbl">Mensajes de utilidad <span class="calc-rate">$0.0113 / msg</span></div>
-            <div class="calc-controls">
+            <div class="calc-row-top">
+              <span class="calc-lbl">Mensajes de utilidad</span>
+              <span class="calc-rate">$0.0113 / mensaje</span>
+            </div>
+            <div class="calc-row-mid">
               <input type="range" class="calc-slider" id="sl-util" min="0" max="20000" step="100" value="4500" oninput="sync('util',this.value)">
+            </div>
+            <div class="calc-row-bot">
               <input type="number" class="calc-num" id="in-util" value="4500" oninput="sync('util',this.value)">
+              <div class="calc-result">= <strong id="r-util">$50.85</strong></div>
             </div>
-            <div class="calc-result">= <strong id="r-util">$50.85</strong></div>
           </div>
 
           <div class="calc-row">
-            <div class="calc-lbl">Mensajes de marketing <span class="calc-rate">$0.0740 / msg</span></div>
-            <div class="calc-controls">
+            <div class="calc-row-top">
+              <span class="calc-lbl">Mensajes de marketing</span>
+              <span class="calc-rate">$0.0740 / mensaje</span>
+            </div>
+            <div class="calc-row-mid">
               <input type="range" class="calc-slider" id="sl-mkt" min="0" max="10000" step="100" value="1800" oninput="sync('mkt',this.value)">
+            </div>
+            <div class="calc-row-bot">
               <input type="number" class="calc-num" id="in-mkt" value="1800" oninput="sync('mkt',this.value)">
+              <div class="calc-result">= <strong id="r-mkt">$133.20</strong></div>
             </div>
-            <div class="calc-result">= <strong id="r-mkt">$133.20</strong></div>
           </div>
 
           <div class="calc-row">
-            <div class="calc-lbl">Minutos voz salientes (móvil) <span class="calc-rate">$0.42 / min</span></div>
-            <div class="calc-controls">
+            <div class="calc-row-top">
+              <span class="calc-lbl">Minutos voz salientes (móvil)</span>
+              <span class="calc-rate">$0.42 / min</span>
+            </div>
+            <div class="calc-row-mid">
               <input type="range" class="calc-slider" id="sl-vout" min="0" max="2000" step="10" value="900" oninput="sync('vout',this.value)">
-              <input type="number" class="calc-num" id="in-vout" value="900" oninput="sync('vout',this.value)">
             </div>
-            <div class="calc-result">= <strong id="r-vout">$378.00</strong></div>
+            <div class="calc-row-bot">
+              <input type="number" class="calc-num" id="in-vout" value="900" data-lines="9" oninput="sync('vout',this.value)">
+              <div class="calc-result">= <strong id="r-vout">$378.00</strong></div>
+            </div>
           </div>
 
           <div class="calc-row">
-            <div class="calc-lbl">Minutos voz entrantes <span class="calc-rate">$0.06 / min</span></div>
-            <div class="calc-controls">
+            <div class="calc-row-top">
+              <span class="calc-lbl">Minutos voz entrantes</span>
+              <span class="calc-rate">$0.06 / min</span>
+            </div>
+            <div class="calc-row-mid">
               <input type="range" class="calc-slider" id="sl-vin" min="0" max="1000" step="10" value="450" oninput="sync('vin',this.value)">
-              <input type="number" class="calc-num" id="in-vin" value="450" oninput="sync('vin',this.value)">
             </div>
-            <div class="calc-result">= <strong id="r-vin">$27.00</strong></div>
+            <div class="calc-row-bot">
+              <input type="number" class="calc-num" id="in-vin" value="450" oninput="sync('vin',this.value)">
+              <div class="calc-result">= <strong id="r-vin">$27.00</strong></div>
+            </div>
           </div>
 
           <div class="calc-row">
-            <div class="calc-lbl">Emails enviados <span class="calc-rate">$0.675 / 1,000</span></div>
-            <div class="calc-controls">
-              <input type="range" class="calc-slider" id="sl-email" min="0" max="50000" step="500" value="9000" oninput="sync('email',this.value)">
-              <input type="number" class="calc-num" id="in-email" value="9000" oninput="sync('email',this.value)">
+            <div class="calc-row-top">
+              <span class="calc-lbl">Emails enviados</span>
+              <span class="calc-rate">$0.675 / 1,000</span>
             </div>
-            <div class="calc-result">= <strong id="r-email">$6.08</strong></div>
+            <div class="calc-row-mid">
+              <input type="range" class="calc-slider" id="sl-email" min="0" max="50000" step="500" value="9000" oninput="sync('email',this.value)">
+            </div>
+            <div class="calc-row-bot">
+              <input type="number" class="calc-num" id="in-email" value="9000" oninput="sync('email',this.value)">
+              <div class="calc-result">= <strong id="r-email">$6.08</strong></div>
+            </div>
           </div>
 
         </div>
 
         <div class="calc-total-box">
           <div class="calc-fixed-lines">
+            <div class="calc-fixed-title">Costos fijos mensuales</div>
             <div class="calc-fixed-row">
               <span>WhatsApp Business API</span>
               <span>$10.00</span>
@@ -1744,16 +1836,22 @@ body {
               <span>Líneas agente de voz <span id="lines-label">(9)</span></span>
               <span id="r-lines">$315.00</span>
             </div>
-            <div class="calc-fixed-row" style="border-top:1px solid rgba(255,255,255,.12);margin-top:8px;padding-top:8px;font-weight:600;color:rgba(255,255,255,.6)">
-              <span>Fijos mensuales</span>
+            <div class="calc-fixed-subtotal">
+              <span>Subtotal fijos</span>
               <span id="r-fixed">$325.00</span>
             </div>
           </div>
-          <div class="calc-divider"></div>
-          <div class="calc-total-label">Total variable mensual estimado</div>
-          <div class="calc-total-val">$<span id="grand-total">595.13</span></div>
-          <div class="calc-total-note">No incluye fee fijo Invers ($447/sede) ni pauta Meta Ads</div>
+          <div class="calc-total-section">
+            <div class="calc-total-label">Total mensual estimado</div>
+            <div class="calc-total-val"><small>$</small><span id="grand-total">595.13</span></div>
+            <div class="calc-total-period">/ mes · infraestructura variable</div>
+            <div class="calc-total-note">No incluye fee fijo Invers ($447/sede) ni inversión en pauta Meta Ads.</div>
+          </div>
         </div>
+      </div>
+
+      <div class="calc-provider-note">
+        ⚠ Los precios de infraestructura (WhatsApp API, telefonía) son fijados por Meta y los proveedores de telefonía y pueden variar sin previo aviso. Invers notificará a UPDS ante cualquier cambio que afecte la estimación de costos.
       </div>
     </div>
 
@@ -1900,12 +1998,12 @@ function sync(key, val){
   calc();
 }
 
-function setPreset(n){
+function setPreset(n, ev){
   const p = PRESETS[n];
   document.getElementById('in-vout').dataset.lines = p.lines;
   ['util','mkt','vout','vin','email'].forEach(k => sync(k, p[k]));
   document.querySelectorAll('.calc-preset').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  ev.target.classList.add('active');
 }
 
 // init
