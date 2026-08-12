@@ -1966,31 +1966,45 @@ body {
 </div><!-- /doc -->
 
 <script>
-const RATES = { util:0.0113, mkt:0.074, vout:0.42, vin:0.06, email:0.675/1000 };
-const PRESETS = {
-  1: { util:500,  mkt:200,  vout:100, vin:50,  email:1000, lines:1  },
-  3: { util:1500, mkt:600,  vout:300, vin:150, email:3000, lines:3  },
-  9: { util:4500, mkt:1800, vout:900, vin:450, email:9000, lines:9  }
+const RATES = {
+  util:  0.0113,
+  mkt:   0.0740,
+  vout:  0.42,
+  vin:   0.06,
+  email: 0.675 / 1000   // $0.675 por cada 1,000 = $0.000675 por email
 };
 
-function fmt(n){ return n.toFixed(2); }
+const PRESETS = {
+  1: { util: 500,  mkt: 200,  vout: 100, vin: 50,  email: 1000, lines: 1 },
+  3: { util: 1500, mkt: 600,  vout: 300, vin: 150, email: 3000, lines: 3 },
+  9: { util: 4500, mkt: 1800, vout: 900, vin: 450, email: 9000, lines: 9 }
+};
 
-function calc(){
-  const util  = +document.getElementById('in-util').value  || 0;
-  const mkt   = +document.getElementById('in-mkt').value   || 0;
-  const vout  = +document.getElementById('in-vout').value  || 0;
-  const vin   = +document.getElementById('in-vin').value   || 0;
-  const email = +document.getElementById('in-email').value || 0;
-  const lines = +document.getElementById('in-vout').dataset.lines || 9;
+let activeLines = 9;  // estado global de líneas de voz
+
+function fmt(n) {
+  return n.toFixed(2);
+}
+
+function calc() {
+  const util  = Math.max(0, parseFloat(document.getElementById('in-util').value)  || 0);
+  const mkt   = Math.max(0, parseFloat(document.getElementById('in-mkt').value)   || 0);
+  const vout  = Math.max(0, parseFloat(document.getElementById('in-vout').value)  || 0);
+  const vin   = Math.max(0, parseFloat(document.getElementById('in-vin').value)   || 0);
+  const email = Math.max(0, parseFloat(document.getElementById('in-email').value) || 0);
 
   const rUtil  = util  * RATES.util;
   const rMkt   = mkt   * RATES.mkt;
   const rVout  = vout  * RATES.vout;
   const rVin   = vin   * RATES.vin;
   const rEmail = email * RATES.email;
-  const rLines = lines * 35;
-  const rFixed = 10 + rLines;
-  const total  = rUtil + rMkt + rVout + rVin + rEmail + rFixed;
+
+  const rApi   = 10;
+  const rLines = activeLines * 35;
+  const rFixed = rApi + rLines;
+
+  const rVar   = rUtil + rMkt + rVout + rVin + rEmail;
+  const total  = rVar + rFixed;
 
   document.getElementById('r-util').textContent  = '$' + fmt(rUtil);
   document.getElementById('r-mkt').textContent   = '$' + fmt(rMkt);
@@ -1999,28 +2013,35 @@ function calc(){
   document.getElementById('r-email').textContent = '$' + fmt(rEmail);
   document.getElementById('r-lines').textContent = '$' + fmt(rLines);
   document.getElementById('r-fixed').textContent = '$' + fmt(rFixed);
+  document.getElementById('lines-label').textContent = '(' + activeLines + ')';
   document.getElementById('grand-total').textContent = fmt(total);
-  document.getElementById('lines-label').textContent = '(' + lines + ')';
 }
 
-function sync(key, val){
-  val = Math.max(0, +val || 0);
+function sync(key, rawVal) {
+  const val = Math.max(0, parseFloat(rawVal) || 0);
   document.getElementById('sl-' + key).value = val;
   document.getElementById('in-' + key).value = val;
   calc();
 }
 
-function setPreset(n, ev){
+function setPreset(n, ev) {
   const p = PRESETS[n];
-  document.getElementById('in-vout').dataset.lines = p.lines;
+  activeLines = p.lines;
   ['util','mkt','vout','vin','email'].forEach(k => sync(k, p[k]));
   document.querySelectorAll('.calc-preset').forEach(b => b.classList.remove('active'));
-  ev.target.classList.add('active');
+  ev.currentTarget.classList.add('active');
 }
 
-// init
-document.getElementById('in-vout').dataset.lines = 9;
-calc();
+// Inicializar con preset 9 sedes
+(function init() {
+  const p = PRESETS[9];
+  activeLines = p.lines;
+  ['util','mkt','vout','vin','email'].forEach(k => {
+    document.getElementById('sl-' + k).value = p[k];
+    document.getElementById('in-' + k).value = p[k];
+  });
+  calc();
+})();
 </script>
 </body>
 </html>
