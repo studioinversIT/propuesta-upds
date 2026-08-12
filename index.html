@@ -1877,36 +1877,12 @@ body {
 
         </div>
 
-        <div class="calc-var-subtotal-row">
-          <span>Subtotal costos variables</span>
-          <span id="r-var">$595.13</span>
-        </div>
-
         <div class="calc-total-box">
-          <div class="calc-fixed-lines">
-            <div class="calc-fixed-title">Costos fijos mensuales</div>
-            <div class="calc-fixed-row">
-              <span>WhatsApp Business API</span>
-              <span>$10.00</span>
-            </div>
-            <div class="calc-fixed-row">
-              <span>Líneas agente de voz <span id="lines-label">(9)</span></span>
-              <span id="r-lines">$315.00</span>
-            </div>
-            <div class="calc-fixed-subtotal">
-              <span>Subtotal fijos</span>
-              <span id="r-fixed">$325.00</span>
-            </div>
-          </div>
           <div class="calc-total-section">
-            <div class="calc-total-label">Total mensual estimado</div>
+            <div class="calc-total-label">Total costos variables estimados</div>
             <div class="calc-total-val"><small>$</small><span id="grand-total">595.13</span></div>
-            <div class="calc-total-period">/ mes · infraestructura variable</div>
-            <div class="calc-with-fee">
-              <div class="calc-with-fee-label">Total con fee Invers incluido</div>
-              <div class="calc-with-fee-val"><small style="font-size:13px;vertical-align:super;opacity:.6;font-weight:700">$</small><span id="r-with-fee">4,943.13</span></div>
-              <div class="calc-with-fee-sub">Infraestructura + fee Invers $447 × <span id="lines-label-fee">9</span> sede<span id="lines-plural">s</span> · excluye pauta Meta Ads</div>
-            </div>
+            <div class="calc-total-period">/ mes · solo costos de uso variable</div>
+            <div class="calc-total-note">No incluye fee Invers ($447/sede/mes), costos fijos de infraestructura ni pauta Meta Ads.</div>
           </div>
         </div>
       </div>
@@ -1975,6 +1951,15 @@ body {
     <div class="faq-item">
       <div class="faq-q">El setup de implementación es significativo — ¿hay un esquema de pago flexible?</div>
       <div class="faq-a">Dado que la implementación se ejecuta en 3 oleadas, el setup se puede fraccionar en 3 pagos alineados con cada oleada — UPDS paga la parte correspondiente cuando esa oleada arranca. Así la inversión está directamente vinculada al avance real del proyecto, no a una sola transferencia inicial.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">¿Desde cuándo empieza a correr la mensualidad y cómo se estructura el pago en el tiempo?</div>
+      <div class="faq-a">La mensualidad de cada sede se activa <strong>desde la fecha de go-live de esa sede</strong> — cuando el sistema está operativo y atendiendo prospectos reales, no desde la firma del contrato. Como la implementación es progresiva, el flujo de pagos también lo es:<br><br>
+      <em>Oleada 1 (semanas 1–6):</em> 3 sedes activadas → mensualidad de 3 sedes.<br>
+      <em>Oleada 2 (semanas 7–12):</em> 3 sedes adicionales → mensualidad de 6 sedes.<br>
+      <em>Oleada 3 (semanas 13–18):</em> últimas 3 sedes → mensualidad completa de 9 sedes.<br><br>
+      UPDS nunca paga el 100% de la mensualidad antes de tener el 100% del sistema funcionando. En cuanto al plazo de retorno: durante el onboarding de cada oleada levantamos los datos reales de esa sede — volumen de consultas, conversión actual y valor promedio de matrícula — y los cruzamos con los benchmarks de Invers. <strong>El resultado es una proyección de ROI con los números propios de UPDS, no un promedio genérico.</strong></div>
     </div>
 
   </div>
@@ -2048,29 +2033,14 @@ function calc() {
   const rVin   = vin   * RATES.vin;
   const rEmail = email * RATES.email;
 
-  const rApi   = 10;
-  const rLines = activeLines * 35;
-  const rFixed = rApi + rLines;
-
-  const rVar   = rUtil + rMkt + rVout + rVin + rEmail;
-  const total  = rVar + rFixed;
-
-  const inverseFee = activeLines * 447;
-  const totalWithFee = total + inverseFee;
+  const rVar = rUtil + rMkt + rVout + rVin + rEmail;
 
   document.getElementById('r-util').textContent  = '$' + fmt(rUtil);
   document.getElementById('r-mkt').textContent   = '$' + fmt(rMkt);
   document.getElementById('r-vout').textContent  = '$' + fmt(rVout);
   document.getElementById('r-vin').textContent   = '$' + fmt(rVin);
   document.getElementById('r-email').textContent = '$' + fmt(rEmail);
-  document.getElementById('r-var').textContent   = '$' + fmt(rVar);
-  document.getElementById('r-lines').textContent = '$' + fmt(rLines);
-  document.getElementById('r-fixed').textContent = '$' + fmt(rFixed);
-  document.getElementById('lines-label').textContent = '(' + activeLines + ')';
-  document.getElementById('lines-label-fee').textContent = activeLines;
-  document.getElementById('lines-plural').textContent = activeLines === 1 ? '' : 's';
-  document.getElementById('grand-total').textContent = fmt(total);
-  document.getElementById('r-with-fee').textContent = fmt(totalWithFee);
+  document.getElementById('grand-total').textContent = fmt(rVar);
 }
 
 function sync(key, rawVal) {
@@ -2082,7 +2052,6 @@ function sync(key, rawVal) {
 
 function setPreset(n, ev) {
   const p = PRESETS[n];
-  activeLines = p.lines;
   ['util','mkt','vout','vin','email'].forEach(k => sync(k, p[k]));
   document.querySelectorAll('.calc-preset').forEach(b => b.classList.remove('active'));
   ev.currentTarget.classList.add('active');
@@ -2091,7 +2060,6 @@ function setPreset(n, ev) {
 // Inicializar con preset 9 sedes
 (function init() {
   const p = PRESETS[9];
-  activeLines = p.lines;
   ['util','mkt','vout','vin','email'].forEach(k => {
     document.getElementById('sl-' + k).value = p[k];
     document.getElementById('in-' + k).value = p[k];
