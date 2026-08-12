@@ -1206,6 +1206,45 @@ body {
   margin-bottom: 0;
   letter-spacing: .2px;
 }
+.calc-var-subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,.45);
+  padding: 18px 48px 14px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.calc-var-subtotal-row span:last-child {
+  font-variant-numeric: tabular-nums;
+  color: rgba(255,255,255,.6);
+}
+.calc-with-fee {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.calc-with-fee-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(165,180,252,.35);
+}
+.calc-with-fee-val {
+  font-size: 22px;
+  font-weight: 900;
+  color: rgba(255,255,255,.55);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.calc-with-fee-sub {
+  font-size: 10.5px;
+  color: rgba(255,255,255,.2);
+}
 .calc-total-note {
   font-size: 11px;
   color: rgba(255,255,255,.18);
@@ -1231,6 +1270,7 @@ body {
   .calc-preset { padding: 10px 18px; font-size: 12px; min-width: unset; }
   .calc-provider-note { padding: 14px 24px; }
   .calc-num { width: 90px; }
+  .calc-var-subtotal-row { padding: 16px 24px 12px; }
 }
 
 /* ═══════════════════════════════════════════════
@@ -1837,6 +1877,11 @@ body {
 
         </div>
 
+        <div class="calc-var-subtotal-row">
+          <span>Subtotal costos variables</span>
+          <span id="r-var">$595.13</span>
+        </div>
+
         <div class="calc-total-box">
           <div class="calc-fixed-lines">
             <div class="calc-fixed-title">Costos fijos mensuales</div>
@@ -1857,7 +1902,11 @@ body {
             <div class="calc-total-label">Total mensual estimado</div>
             <div class="calc-total-val"><small>$</small><span id="grand-total">595.13</span></div>
             <div class="calc-total-period">/ mes · infraestructura variable</div>
-            <div class="calc-total-note">No incluye fee fijo Invers ($447/sede) ni inversión en pauta Meta Ads.</div>
+            <div class="calc-with-fee">
+              <div class="calc-with-fee-label">Total con fee Invers incluido</div>
+              <div class="calc-with-fee-val"><small style="font-size:13px;vertical-align:super;opacity:.6;font-weight:700">$</small><span id="r-with-fee">4,943.13</span></div>
+              <div class="calc-with-fee-sub">Infraestructura + fee Invers $447 × <span id="lines-label-fee">9</span> sede<span id="lines-plural">s</span> · excluye pauta Meta Ads</div>
+            </div>
           </div>
         </div>
       </div>
@@ -2006,15 +2055,22 @@ function calc() {
   const rVar   = rUtil + rMkt + rVout + rVin + rEmail;
   const total  = rVar + rFixed;
 
+  const inverseFee = activeLines * 447;
+  const totalWithFee = total + inverseFee;
+
   document.getElementById('r-util').textContent  = '$' + fmt(rUtil);
   document.getElementById('r-mkt').textContent   = '$' + fmt(rMkt);
   document.getElementById('r-vout').textContent  = '$' + fmt(rVout);
   document.getElementById('r-vin').textContent   = '$' + fmt(rVin);
   document.getElementById('r-email').textContent = '$' + fmt(rEmail);
+  document.getElementById('r-var').textContent   = '$' + fmt(rVar);
   document.getElementById('r-lines').textContent = '$' + fmt(rLines);
   document.getElementById('r-fixed').textContent = '$' + fmt(rFixed);
   document.getElementById('lines-label').textContent = '(' + activeLines + ')';
+  document.getElementById('lines-label-fee').textContent = activeLines;
+  document.getElementById('lines-plural').textContent = activeLines === 1 ? '' : 's';
   document.getElementById('grand-total').textContent = fmt(total);
+  document.getElementById('r-with-fee').textContent = fmt(totalWithFee);
 }
 
 function sync(key, rawVal) {
