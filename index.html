@@ -895,6 +895,47 @@ body {
 }
 
 /* ═══════════════════════════════════════════════
+   FAQ — ANTES DE DECIDIR
+═══════════════════════════════════════════════ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+.faq-item {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 40px;
+  align-items: start;
+}
+.faq-q {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.45;
+  letter-spacing: -0.1px;
+}
+.faq-a {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.72;
+}
+.faq-a strong { color: var(--ink); font-weight: 600; }
+.faq-a em { font-style: normal; color: var(--indigo); font-weight: 500; }
+
+@media(max-width:640px){
+  .faq-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px 0;
+  }
+  .faq-q { font-size: 14px; }
+  .faq-a { font-size: 13px; }
+}
+
+/* ═══════════════════════════════════════════════
    MOBILE — < 640px
 ═══════════════════════════════════════════════ */
 @media(max-width:640px){
@@ -1326,6 +1367,62 @@ body {
 
   <div class="pricing-footnote">
     <strong>Costos variables (a cargo de UPDS):</strong> Pauta publicitaria Meta · WhatsApp Business API por número · Telefonía agente de voz según volumen. Precios en USD. El acuerdo holding es un contrato único que cubre las 9 sedes con tarifa fija por sede durante toda la vigencia.
+  </div>
+</div>
+
+<div class="rule"></div>
+
+
+<!-- ══════════════════════════════════
+     06 — PREGUNTAS FRECUENTES
+══════════════════════════════════ -->
+<div class="section">
+  <div class="s-eyebrow">06 · Antes de decidir</div>
+  <h2 class="s-h2">Lo que UPDS<br>necesita saber.</h2>
+  <p class="s-lead">Las dudas más frecuentes en esta etapa — respondidas sin ambigüedad.</p>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-q">¿UPDS necesita contratar personal adicional para operar el sistema?</div>
+      <div class="faq-a">No se necesita contratar a nadie nuevo. Lo que sí recomendamos es designar a una persona del equipo actual como contacto principal con Invers. Esa persona asiste a los catch-ups semanales de 20 minutos y nos facilita la información que necesitamos en el camino. No se requiere ningún conocimiento técnico — solo disponibilidad y acceso a la operación.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">¿Se puede empezar con un piloto de 3 sedes antes de comprometer las 9?</div>
+      <div class="faq-a">Sí. El acuerdo holding contempla las 9 sedes, pero la implementación ya está diseñada en oleadas de 3 sedes. Si UPDS prefiere validar resultados con la primera oleada antes de activar las siguientes, el contrato se puede estructurar con hitos de activación — completada la primera oleada con resultados concretos, se activa la segunda. <strong>Las condiciones económicas del acuerdo holding se mantienen desde el inicio</strong>, independientemente del ritmo de activación.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">¿Cómo vemos que el sistema está funcionando? ¿Qué indicadores se miden?</div>
+      <div class="faq-a">El sistema incluye un dashboard de KPIs en tiempo real, accesible desde web y app mobile: volumen de prospectos atendidos, tiempo de primera respuesta, tasa de conversión por etapa, no-shows evitados y comparativo entre sedes. Además, reciben reportes semanales o mensuales según su preferencia. El punto de partida se establece durante el onboarding — esos datos base son los que permiten medir el antes y el después con precisión, y son el escáner que nos permite proyectar la conversión en el tiempo.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">¿En cuánto tiempo se recupera la inversión?</div>
+      <div class="faq-a">El retorno depende de tres variables que recopilamos en el onboarding: valor promedio de una matrícula, volumen mensual de prospectos y porcentaje actual de conversión. Con esos datos calculamos el retorno proyectado específico para UPDS. Lo que podemos afirmar en base a clientes con operaciones similares: los primeros resultados tangibles en conversión se observan a partir del <strong>tercer mes</strong>, y la mejora sostenida — que es la que cubre la inversión — se consolida en los primeros <strong>6 meses</strong> de operación.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">¿Quién es dueño de los datos? ¿Qué pasa si terminamos el contrato?</div>
+      <div class="faq-a">UPDS es propietaria al 100% de sus datos. Invers administra la plataforma pero nunca se apropia de la información. Los datos están alojados en <strong>Amazon Web Services (AWS)</strong> con cifrado en tránsito y en reposo. Las condiciones de propiedad, acceso y confidencialidad quedan detalladas contractualmente. Si el contrato termina por cualquier razón, Invers realiza la migración completa de la base de datos para que UPDS la conserve íntegramente — sin restricciones ni costos adicionales.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">¿Qué hace el agente cuando no tiene la información para responder?</div>
+      <div class="faq-a">Cuando el agente detecta una consulta fuera de su alcance, ejecuta un <em>handoff</em> automático: escala la conversación a un asesor humano con todo el contexto — quién es el prospecto, qué preguntó y qué respondió el agente hasta ese momento. El asesor retoma sin que el prospecto tenga que repetir nada. El sistema <strong>nunca genera información que no tiene</strong> ni deja al prospecto sin respuesta. El alcance del agente se define con UPDS durante el onboarding y se puede ajustar en cualquier momento.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">¿Cuánto dura el contrato y qué tan flexible es?</div>
+      <div class="faq-a">El contrato estándar es de <strong>12 meses con renovación</strong>. Si UPDS prefiere evaluar la continuidad antes de comprometer el año completo, podemos estructurar el acuerdo con hitos de activación por oleada — cada oleada completada es un punto de evaluación. El objetivo no es encadenarlos a un contrato, sino que los resultados hablen por sí solos.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">El setup de implementación es significativo — ¿hay un esquema de pago flexible?</div>
+      <div class="faq-a">Dado que la implementación se ejecuta en 3 oleadas, el setup se puede fraccionar en 3 pagos alineados con cada oleada — UPDS paga la parte correspondiente cuando esa oleada arranca. Así la inversión está directamente vinculada al avance real del proyecto, no a una sola transferencia inicial.</div>
+    </div>
+
   </div>
 </div>
 
