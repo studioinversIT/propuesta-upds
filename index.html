@@ -1431,6 +1431,350 @@ body {
     font-size: 14.5px;
   }
 }
+
+/* ═══════════════════════════════════════════════
+   PRICE CASCADE — V2 NEGOTIATION SECTION
+═══════════════════════════════════════════════ */
+.price-ref-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px 24px;
+  margin-bottom: 0;
+  flex-wrap: wrap;
+}
+.price-ref-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-weight: 500;
+}
+.price-ref-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: var(--border);
+  padding: 3px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.price-ref-values {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.price-ref-val {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.price-ref-concept {
+  font-size: 11px;
+  color: var(--ink-3);
+  font-weight: 500;
+}
+.price-ref-num {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink-2);
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-3);
+  letter-spacing: -0.5px;
+}
+.price-ref-num em {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-3);
+  text-decoration: none;
+}
+.price-ref-sep {
+  font-size: 14px;
+  color: var(--border);
+  font-weight: 300;
+}
+
+/* Saving level connector */
+.saving-connector {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 0 16px;
+}
+.sc-line {
+  flex: 1;
+  height: 1.5px;
+  background: var(--border);
+}
+.sc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--indigo);
+  background: var(--indigo-l);
+  border: 1.5px solid var(--indigo-m);
+  padding: 6px 16px;
+  border-radius: 99px;
+}
+.sc-badge--neg {
+  color: #059669;
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+.sc-badge-arrow {
+  font-size: 14px;
+}
+
+/* Holding savings row */
+.holding-savings {
+  background: var(--white);
+  border: 1.5px solid var(--indigo-m);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.hs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hs-from {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hs-concept {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  min-width: 150px;
+}
+.hs-old {
+  font-size: 13px;
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.hs-arrow {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.hs-new {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--indigo);
+  letter-spacing: -0.3px;
+}
+.hs-saving {
+  display: inline-block;
+  background: var(--indigo-l);
+  color: var(--indigo-d);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.hs-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 2px 0;
+}
+
+/* Negotiation option cards */
+.neg-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media(max-width:680px){ .neg-options-grid{ grid-template-columns:1fr; } }
+
+.neg-opt {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.neg-opt--a {
+  border-color: var(--indigo-m);
+}
+.neg-opt--b {
+  border-color: #a7f3d0;
+}
+
+.neg-opt-header {
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.neg-opt-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--indigo);
+  background: var(--indigo-l);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+.neg-opt-tag--b {
+  color: #059669;
+  background: #ecfdf5;
+}
+.neg-opt-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.4px;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.neg-opt-sub {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  line-height: 1.6;
+}
+
+.neg-opt-prices {
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.neg-price-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.neg-price-concept {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  font-weight: 500;
+}
+.neg-price-change {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.neg-price-was {
+  font-size: 12px;
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.neg-price-is {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.4px;
+}
+.neg-price-pct {
+  font-size: 11px;
+  font-weight: 700;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.neg-price-same {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.neg-no-change {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ink-3);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.neg-savings-summary {
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.nss-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.nss-row strong {
+  color: var(--ink-2);
+  font-weight: 700;
+}
+.nss-total {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1.5px solid var(--border);
+}
+.nss-total-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+.nss-total-values {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.nss-total-values span {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+  background: var(--indigo-l);
+  color: var(--indigo-d);
+  padding: 4px 12px;
+  border-radius: 7px;
+}
+
+.neg-note {
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  line-height: 1.65;
+  padding: 14px 18px;
+  background: var(--bg);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+}
 </style>
 </head>
 <body>
@@ -1690,58 +2034,165 @@ body {
 ══════════════════════════════════ -->
 <div class="section page-break">
   <div class="s-eyebrow">05 · Inversión</div>
-  <h2 class="s-h2">Una tarifa por sede.<br>Un solo acuerdo.</h2>
-  <p class="s-lead">Cada sede opera con su propia cuenta SmartInvers — sistema independiente, datos propios, equipo propio. El acuerdo holding fija una tarifa por sede menor a la que pagarían sede a sede, durante toda la implementación.</p>
+  <h2 class="s-h2">El precio de mercado.<br>El precio que UPDS paga.</h2>
+  <p class="s-lead">El valor del sistema no cambia con el descuento — lo que cambia es el acceso. Aquí está el desglose completo: desde el precio de referencia de mercado hasta las condiciones específicas del acuerdo UPDS.</p>
 
-  <div class="pricing-outer">
-
-    <!-- HOLDING -->
-    <div class="price-featured">
-      <div class="price-rec">&#11088; Acuerdo recomendado</div>
-      <div class="p-title">Acuerdo Holding · 9 Sedes</div>
-      <div class="p-sub">9 cuentas SmartInvers independientes bajo un solo contrato. Tarifa por sede con beneficio de volumen — más baja que la tarifa individual de mercado.</div>
-      <div class="p-price-row">
-        <div class="p-lbl">Setup · por cada sede del acuerdo</div>
-        <div class="p-val"><small>$</small>1,997</div>
-        <div class="p-lbl">Mensualidad · por cada sede del acuerdo</div>
-        <div class="p-monthly">$447 / mes por sede</div>
-        <div class="p-monthly-note">Soporte Premium incluido · 5 días/semana</div>
+  <!-- NIVEL 0: Precio de referencia (anchor) -->
+  <div class="price-ref-bar">
+    <div class="price-ref-label">
+      <span class="price-ref-tag">Precio de referencia</span>
+      Tarifa individual · 1 sede · sin beneficio de volumen
+    </div>
+    <div class="price-ref-values">
+      <div class="price-ref-val">
+        <span class="price-ref-concept">Setup</span>
+        <span class="price-ref-num">$2,749 <em>/ sede</em></span>
       </div>
-      <ul class="p-list">
-        <li>9 cuentas SmartInvers independientes — datos 100% de UPDS por sede</li>
-        <li>Los 4 pilares en cada cuenta: Captación, Automatización, Agentes IA, Revenue Intelligence</li>
-        <li>Camila (texto) activa desde semana 2 · Agente de Voz incluido en Fase 2</li>
-        <li>Dashboard de KPIs en vivo — App Web y App Mobile por sede</li>
-        <li>Benchmarks cruzados entre las 9 sedes</li>
-        <li>Implementación en 3 oleadas — sin sobresaturar los equipos</li>
-        <li>Capacitación del equipo completo + manual operativo</li>
-        <li>Soporte Premium: SLA 95%, 5 días/semana</li>
-      </ul>
+      <div class="price-ref-sep">·</div>
+      <div class="price-ref-val">
+        <span class="price-ref-concept">Mensualidad</span>
+        <span class="price-ref-num">$647 <em>/ sede · mes</em></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONECTOR NIVEL 1 -->
+  <div class="saving-connector">
+    <div class="sc-line"></div>
+    <div class="sc-badge">
+      <span class="sc-badge-arrow">↓</span>
+      Acuerdo Holding · 9 sedes · Ahorro 1
+    </div>
+    <div class="sc-line"></div>
+  </div>
+
+  <!-- NIVEL 1: Holding savings -->
+  <div class="holding-savings">
+    <div class="hs-row">
+      <div class="hs-from">
+        <span class="hs-concept">Setup por sede</span>
+        <span class="hs-old">$2,749</span>
+        <span class="hs-arrow">→</span>
+        <span class="hs-new">$1,997</span>
+      </div>
+      <span class="hs-saving">$6,768 ahorrados · 9 sedes</span>
+    </div>
+    <div class="hs-divider"></div>
+    <div class="hs-row">
+      <div class="hs-from">
+        <span class="hs-concept">Mensualidad por sede</span>
+        <span class="hs-old">$647/mes</span>
+        <span class="hs-arrow">→</span>
+        <span class="hs-new">$447/mes</span>
+      </div>
+      <span class="hs-saving">$1,800/mes ahorrados · 9 sedes</span>
+    </div>
+  </div>
+
+  <!-- CONECTOR NIVEL 2 -->
+  <div class="saving-connector">
+    <div class="sc-line"></div>
+    <div class="sc-badge sc-badge--neg">
+      <span class="sc-badge-arrow">↓</span>
+      Propuesta de negociación · Ahorro adicional · Elige una opción
+    </div>
+    <div class="sc-line"></div>
+  </div>
+
+  <!-- NIVEL 2: Opciones A y B -->
+  <div class="neg-options-grid">
+
+    <!-- OPCIÓN A -->
+    <div class="neg-opt neg-opt--a">
+      <div class="neg-opt-header">
+        <div class="neg-opt-tag">Opción A</div>
+        <div class="neg-opt-title">Ahorro concentrado<br>en el setup</div>
+        <div class="neg-opt-sub">El descuento va en la inversión inicial. La mensualidad queda intacta — sin impacto en el costo mensual a largo plazo.</div>
+      </div>
+      <div class="neg-opt-prices">
+        <div class="neg-price-line">
+          <span class="neg-price-concept">Setup / sede</span>
+          <div class="neg-price-change">
+            <span class="neg-price-was">$1,997</span>
+            <span class="neg-price-is">$1,598</span>
+            <span class="neg-price-pct">−20%</span>
+          </div>
+        </div>
+        <div class="neg-price-line">
+          <span class="neg-price-concept">Mensualidad / sede</span>
+          <div class="neg-price-same">
+            <span>$447/mes</span>
+            <span class="neg-no-change">sin cambio</span>
+          </div>
+        </div>
+      </div>
+      <div class="neg-savings-summary">
+        <div class="nss-row">
+          <span>Ahorro adicional en setup · 9 sedes</span>
+          <strong>$3,591</strong>
+        </div>
+        <div class="nss-row">
+          <span>Ahorro adicional en mensualidad</span>
+          <strong>—</strong>
+        </div>
+        <div class="nss-total">
+          <div class="nss-total-label">Ahorro total vs precio individual</div>
+          <div class="nss-total-values">
+            <span>$10,359 en setup</span>
+            <span>$1,800/mes</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- INDIVIDUAL -->
-    <div class="price-secondary">
-      <div class="p-title">Tarifa Individual · 1 Sede</div>
-      <div class="p-sub">Para validar el sistema con una sede antes de comprometer el acuerdo holding. Sin beneficio de volumen.</div>
-      <div class="p-price-row">
-        <div class="p-lbl">Setup (tarifa estándar)</div>
-        <div class="p-val"><small>$</small>2,749</div>
-        <div class="p-lbl">Mensualidad (tarifa estándar)</div>
-        <div class="p-monthly">$647 / mes</div>
-        <div class="p-monthly-note">Soporte Estándar · 2 días/semana</div>
+    <!-- OPCIÓN B -->
+    <div class="neg-opt neg-opt--b">
+      <div class="neg-opt-header">
+        <div class="neg-opt-tag neg-opt-tag--b">Opción B</div>
+        <div class="neg-opt-title">Ahorro distribuido<br>en setup y mensualidad</div>
+        <div class="neg-opt-sub">El descuento se reparte entre la inversión inicial y la mensualidad mensual de cada sede.</div>
       </div>
-      <ul class="p-list">
-        <li>1 cuenta SmartInvers para la sede piloto</li>
-        <li>Pilares 1 y 2 — Captación + Automatización</li>
-        <li>Camila (texto) configurada para la sede</li>
-        <li>Pipeline y dashboard básico de KPIs</li>
-        <li>Capacitación del equipo de la sede</li>
-        <li class="dim">Precio por sede mayor que en el acuerdo holding</li>
-        <li class="dim">Sin Revenue Intelligence multi-sede</li>
-        <li class="dim">Agente de Voz no incluido</li>
-      </ul>
+      <div class="neg-opt-prices">
+        <div class="neg-price-line">
+          <span class="neg-price-concept">Setup / sede</span>
+          <div class="neg-price-change">
+            <span class="neg-price-was">$1,997</span>
+            <span class="neg-price-is">$1,797</span>
+            <span class="neg-price-pct">−10%</span>
+          </div>
+        </div>
+        <div class="neg-price-line">
+          <span class="neg-price-concept">Mensualidad / sede</span>
+          <div class="neg-price-change">
+            <span class="neg-price-was">$447/mes</span>
+            <span class="neg-price-is">$402/mes</span>
+            <span class="neg-price-pct">−10%</span>
+          </div>
+        </div>
+      </div>
+      <div class="neg-savings-summary">
+        <div class="nss-row">
+          <span>Ahorro adicional en setup · 9 sedes</span>
+          <strong>$1,800</strong>
+        </div>
+        <div class="nss-row">
+          <span>Ahorro adicional en mensualidad · 9 sedes</span>
+          <strong>$405/mes</strong>
+        </div>
+        <div class="nss-total">
+          <div class="nss-total-label">Ahorro total vs precio individual</div>
+          <div class="nss-total-values">
+            <span>$8,568 en setup</span>
+            <span>$2,205/mes</span>
+          </div>
+        </div>
+      </div>
     </div>
 
+  </div>
+
+  <div class="neg-note">
+    Ambas opciones incluyen exactamente los mismos 4 pilares, las 9 cuentas SmartInvers independientes, el mismo proceso de implementación en oleadas y el mismo nivel de soporte. La diferencia es únicamente en la estructura del pago — el sistema que recibe UPDS es idéntico en cualquiera de los dos caminos.
   </div>
 
   <div class="var-costs">
